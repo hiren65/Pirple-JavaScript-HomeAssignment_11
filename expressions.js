@@ -4,8 +4,11 @@
 *
  */
 let tmp;
-let inputStr = ["a","b","c"];
-//let inputStr = 12;
+let inputStr;
+inputStr = ["a","b","c"];
+//inputStr = 12;
+//inputStr = null;
+//inputStr = "jfggfjgfj";
 //convert array to json string
 function convertArrayToJson(input){
 
@@ -41,20 +44,25 @@ function exceptionthrow(str) {
         if (typeof str === 'boolean' ){
             throw new SyntaxError("Incomplete data:  Boolean");
         }
+        if (str === undefined){
+            throw new SyntaxError("Incomplete data: undefined");
+        }
         if ( Array.isArray(str)){
             //tmp = JSON.stringify(str);
             console.log(tmp);
             //throw new SyntaxError("Incomplete data: no name");
             return true;
-        }else if (isNaN(str)){
-            throw new SyntaxError("Incomplete data: nil string");
         }
         else if (str === null ){
             throw new SyntaxError("Incomplete data: null string");
         }
         else if (typeof str === 'string' || value instanceof str ){
-            throw new SyntaxError("Incomplete data:  string");
+            throw new SyntaxError("Incomplete data:  string other than array");
         }
+        else if (isNaN(str)){
+            throw new SyntaxError("Incomplete data: nil string");
+        }
+
         else{
             tmp = JSON.stringify(str);
             console.log(tmp);
