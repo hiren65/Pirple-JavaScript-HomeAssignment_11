@@ -5,21 +5,18 @@
  */
 let tmp;
 let inputStr;
-inputStr = ["a","b","c"];
+inputStr = '["a","b","c"]';
 //inputStr = 12;
 //inputStr = null;
 //inputStr = "jfggfjgfj";
+
 //convert array to json string
 function convertArrayToJson(input){
-
     return JSON.stringify(input);
 }
 
-                         //convertArrayToJson(inputStr);
-
 // input json string in to function to convert in to array with reverse
-function reverseJsonArray(strArr) {
-
+function main(strArr) {
     // make string to array
     let strRsvArr = JSON.parse(strArr);
     //convert in to reverse
@@ -27,16 +24,9 @@ function reverseJsonArray(strArr) {
 
     return convertArrayToJson(strRsvArr);
 }
-
-
-
-
-//console.log(getArr);
-
-
-
+//create exceptions throw to contain error
 function exceptionthrow(str) {
-    console.log(str + " " + typeof str);
+    console.log("Data " +str + " type " + typeof str);
     try{
         if (isNumber(str) === true){
             throw new SyntaxError("Incomplete data:  Number");
@@ -49,14 +39,28 @@ function exceptionthrow(str) {
         }
         if ( Array.isArray(str)){
             //tmp = JSON.stringify(str);
-            console.log(tmp);
-            //throw new SyntaxError("Incomplete data: no name");
-            return true;
+            //let strR = JSON.parse(str);
+
+            //console.log(tmp);
+            throw new SyntaxError("Incomplete data: Array");
+            //return false;
         }
         else if (str === null ){
             throw new SyntaxError("Incomplete data: null string");
         }
         else if (typeof str === 'string' || value instanceof str ){
+            tmp = JSON.parse(str);
+            if (Array.isArray(tmp)) {
+                if (tmp.length ===0){
+                    console.log("JSON OBJECT contains array is blank");
+                    return true;
+                }if (tmp.length === 1){
+                    console.log("JSON OBJECT contains array is has one element");
+                    return true;
+                }
+                console.log("JSON OBJECT contains array!!");
+                return true
+            }else
             throw new SyntaxError("Incomplete data:  string other than array");
         }
         else if (isNaN(str)){
@@ -65,7 +69,7 @@ function exceptionthrow(str) {
 
         else{
             tmp = JSON.stringify(str);
-            console.log(tmp);
+            //console.log(tmp);
             throw new SyntaxError("Incomplete data: blank unknown");
             //return false;
         }
@@ -83,21 +87,68 @@ function exceptionthrow(str) {
 function isNumber (value) {
     return typeof value === 'number' && isFinite(value);
 }
-console.log(isNumber(16));
+//console.log(isNumber(16));
 
-function main(st) {
-    let cch = exceptionthrow(st);
-    if (cch === false){
-        console.log("wrong data");
-        return;
-    }
-    let inputStrConverted =  convertArrayToJson(st);
 
-    console.log("what arr " + inputStrConverted);
-    console.log("check " + exceptionthrow(st));
-    let getArr = reverseJsonArray(inputStrConverted);
-    console.log("reverse "+getArr);
+//reverseJsonArray
+let myReverseArray = function reverseJsonArray(st) {
+            let cch = exceptionthrow(st);
+            if (cch === false){
+                //console.log("wrong data");
+                return false;
+            }else{
+            //let inputStrConverted =  convertArrayToJson(st);
+
+            //console.log("what arr " + inputStrConverted);
+            //console.log("check " + exceptionthrow(st));
+            let getArr = main(st);
+            console.log("reverse "+getArr);
+            return getArr;
+            }
+        };
+//console.log(myReverseArray(inputStr));
+
+//now check all posibilities of throw error
+/*
+1. Without any arguments
+2. With a boolean as the argument
+3. With an Array (non-stringified) as the argument
+4. With a string argument that is not properly formatted JSON
+5. With a stringified-array that only has one value
+6. With a stringified-array that is empty
+7. With a stringified-array that has an even-number of values
+8. With a stringified-array that has an odd-number of values
+ */
+//testing array of above conditions total 8 has mate
+let exceptionErrorInputArray = [,true,["a1","b1","c1"],'{[1,2]}',"[1]",'[]', '[2,4,6]','[1,3,5]'];
+
+//check all 8 conditions through array loop
+for (let i=0;i<exceptionErrorInputArray.length;i++) {
+
+    //console.log(whatAmI(exceptionErrorInputArray[i]));
+    if (i===0){
+        console.log(myReverseArray() + "\n");
+    } else
+    console.log(myReverseArray(exceptionErrorInputArray[i]) + "\n");
 
 }
-main(inputStr);
-//exceptionthrow("");
+
+
+
+
+////////////////////////////////////alternative/////////////////////////////////////////////////////
+//Another way to get data type
+function whatAmI(me){ return Object.prototype.toString.call(me).split(/\W/)[2]; }
+
+// tests
+/*console.log(
+    whatAmI(["aiming","@"]),
+    whatAmI({living:4,breathing:4}),
+    whatAmI(function(ing){ return ing+" to the global window" }),
+    whatAmI("going to do with you?"),
+    whatAmI(67),
+    whatAmI(),
+    whatAmI(true),
+    whatAmI([1] )
+);*/
+////////////////////////////////////////////////////////////////////////////////////////////
