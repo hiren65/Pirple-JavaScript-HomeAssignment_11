@@ -45,6 +45,7 @@ function exceptionthrow(str) {
             throw new SyntaxError("Incomplete data: Array");
             //return false;
         }
+
         else if (str === null ){
             throw new SyntaxError("Incomplete data: null string");
         }
@@ -58,6 +59,17 @@ function exceptionthrow(str) {
                     console.log("JSON OBJECT contains array is has one element");
                     return true;
                 }
+                if (containsEvenNums(tmp) === true){
+                    //throw new SyntaxError("Incomplete data: Array contain all even number");
+                    console.log("JSON OBJECT contains array is has all even number");
+                    return true;
+                }
+                if (containsOddNums(tmp) === true) {
+                    //throw new SyntaxError("Incomplete data: Array contains all odd number");
+                    console.log("JSON OBJECT contains array is has all odd number");
+                    return true;
+                }
+
                 console.log("JSON OBJECT contains array!!");
                 return true
             }else
@@ -82,7 +94,44 @@ function exceptionthrow(str) {
     }
 
 }
+//check even number in array
 
+var containsEvenNums = function(numArray) {
+    let count = 0;
+    numArray.forEach(function(element) {
+        if(element % 2 == 0) {
+            count++;
+            //return true;
+        }
+    });
+    if (numArray.length === count){
+        console.log("array contains all even number");
+        return true;
+    }
+    console.log("array contains not all even or odd number");
+    return false;
+};
+
+//check odd number
+var containsOddNums = function(numArray) {
+    let count = 0;
+    numArray.forEach(function(element) {
+        if(element % 2 !== 0 || element === 2 ) {
+            count++;
+            //return true;
+        }
+    });
+    if (numArray.length === count){
+        console.log("array contains all odd number");
+        return true;
+    }
+    console.log("array contains not all even or odd number 111");
+    return false;
+};
+
+
+//console.log("is even " + containsEvenNums([4,6,7]));
+//console.log("is odd " + containsOddNums([1,2,3,7]));
 
 function isNumber (value) {
     return typeof value === 'number' && isFinite(value);
@@ -120,7 +169,7 @@ let myReverseArray = function reverseJsonArray(st) {
 8. With a stringified-array that has an odd-number of values
  */
 //testing array of above conditions total 8 has mate
-let exceptionErrorInputArray = [,true,["a1","b1","c1"],'{[1,2]}',"[1]",'[]', '[2,4,6]','[1,3,5]'];
+let exceptionErrorInputArray = [ "no argument",true,["a1","b1","c1"],'{[1,2]}',"[1]",'[]', '[2,4,6]','[1,3,5]'];
 
 //check all 8 conditions through array loop
 for (let i=0;i<exceptionErrorInputArray.length;i++) {
