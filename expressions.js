@@ -5,10 +5,7 @@
  */
 let tmp;
 let inputStr;
-inputStr = '["a","b","c"]';
-//inputStr = 12;
-//inputStr = null;
-//inputStr = "jfggfjgfj";
+
 
 //convert array to json string
 function convertArrayToJson(input){
@@ -99,6 +96,9 @@ function exceptionthrow(str) {
 var containsEvenNums = function(numArray) {
     let count = 0;
     numArray.forEach(function(element) {
+        if (isNumber(element) === false){
+            return false ;
+        }
         if(element % 2 == 0) {
             count++;
             //return true;
@@ -116,6 +116,9 @@ var containsEvenNums = function(numArray) {
 var containsOddNums = function(numArray) {
     let count = 0;
     numArray.forEach(function(element) {
+        if (isNumber(element) === false){
+            return false ;
+        }
         if(element % 2 !== 0 || element === 2 ) {
             count++;
             //return true;
@@ -155,7 +158,16 @@ let myReverseArray = function reverseJsonArray(st) {
             return getArr;
             }
         };
-//console.log(myReverseArray(inputStr));
+//different inputs combinations
+inputStr = '["a","b","c"]';
+console.log(myReverseArray(inputStr));
+inputStr = 12;
+console.log(myReverseArray(inputStr));
+inputStr = null;
+console.log(myReverseArray(inputStr));
+inputStr = "jfggfjgfj";
+console.log(myReverseArray(inputStr));
+
 
 //now check all posibilities of throw error
 /*
