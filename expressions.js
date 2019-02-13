@@ -99,16 +99,16 @@ var containsEvenNums = function(numArray) {
         if (isNumber(element) === false){
             return false ;
         }
-        if(element % 2 == 0) {
+        if(element % 2 === 0) {
             count++;
             //return true;
         }
     });
     if (numArray.length === count){
-        console.log("array contains all even number");
+        //console.log("array contains all even number");
         return true;
     }
-    console.log("array contains not all even or odd number");
+    //console.log("array contains not all even or odd number");
     return false;
 };
 
@@ -125,10 +125,10 @@ var containsOddNums = function(numArray) {
         }
     });
     if (numArray.length === count){
-        console.log("array contains all odd number");
+        //console.log("array contains all odd number");
         return true;
     }
-    console.log("array contains not all even or odd number 111");
+    //console.log("array contains not all even or odd number !");
     return false;
 };
 
@@ -161,14 +161,16 @@ let myReverseArray = function reverseJsonArray(st) {
 //different inputs combinations
 inputStr = '["a","b","c"]';
 console.log(myReverseArray(inputStr));
+console.log("\n");
 inputStr = 12;
 console.log(myReverseArray(inputStr));
 inputStr = null;
 console.log(myReverseArray(inputStr));
 inputStr = "jfggfjgfj";
 console.log(myReverseArray(inputStr));
+console.log("\n");
 
-
+//Extra Credit:
 //now check all posibilities of throw error
 /*
 1. Without any arguments
@@ -193,6 +195,8 @@ for (let i=0;i<exceptionErrorInputArray.length;i++) {
     console.log(myReverseArray(exceptionErrorInputArray[i]) + "\n");
 
 }
+
+
 
 
 
